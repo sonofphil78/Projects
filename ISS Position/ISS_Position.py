@@ -1,56 +1,24 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[8]:
+# Plots current location of the International Space Station
 
-
+# Bring in libraries
 import pandas as pd
 import plotly.express as px
 
-
-# In[9]:
-
-
+# Define static terms
 url = 'http://api.open-notify.org/iss-now.json'
 df = pd.read_json(url)
 
-
-# In[10]:
-
-
-df
-
-
-# In[11]:
-
-
+# Pull variables
 df['latitude'] = df.loc['latitude','iss_position']
 df['longitude'] = df.loc['longitude','iss_position']
 df.reset_index(inplace=True)
+
+# Remove unused variables
 df = df.drop(['index','message'], axis=1)
 
-
-# In[12]:
-
-
-df
-
-
-# In[13]:
-
-
+# Setup and plot
 fig = px.scatter_geo(df,lat='latitude',lon='longitude')
-
-
-# In[14]:
-
-
 fig.show()
-
-
-# In[ ]:
-
-
-
-
-
