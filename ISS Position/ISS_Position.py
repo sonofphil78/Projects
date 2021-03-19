@@ -19,6 +19,9 @@ df.reset_index(inplace=True)
 # Remove unused variables
 df = df.drop(['index','message'], axis=1)
 
-# Setup and plot
+# Setup map plot
 fig = px.scatter_geo(df,lat='latitude',lon='longitude')
+
+# Change symbol and show
+fig.update_traces(marker=dict(size=25,symbol="star",color='red',opacity=0.5))
 fig.show()
